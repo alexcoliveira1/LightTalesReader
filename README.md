@@ -1,2 +1,2 @@
 # LightTalesReader
-LightTalesReader is a reder of Light Novels translations from GravityTales.com website.
+LightTalesReader is a reader of Light Novels translations from GravityTales.com website.
