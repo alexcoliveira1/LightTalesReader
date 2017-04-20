@@ -1,0 +1,15 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/content"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context="com.alexcoliveira1.lighttalesreader.view.ChapterPageFragment">
+
+    <TextView style="?android:textAppearanceMedium"
+        android:id="@+id/chapter_content"
+        android:padding="16dp"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+</ScrollView>

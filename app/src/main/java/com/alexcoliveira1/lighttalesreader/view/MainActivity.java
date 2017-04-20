@@ -1,27 +1,26 @@
 package com.alexcoliveira1.lighttalesreader.view;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.content.Loader;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.support.v7.widget.Toolbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 
-import com.alexcoliveira1.lighttalesreader.network.NovelsLoader;
 import com.alexcoliveira1.lighttalesreader.R;
 import com.alexcoliveira1.lighttalesreader.data.Novels;
+import com.alexcoliveira1.lighttalesreader.network.NovelsLoader;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,LoaderManager.LoaderCallbacks<Novels> {
@@ -32,12 +31,6 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = "MyActivity";
     public Novels novels = new Novels();
-    private NovelUpdateListInterface listener ;
-
-    public void setListener(NovelUpdateListInterface listener)
-    {
-        this.listener = listener ;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +57,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);*/
     }
 
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        if(fragment instanceof NovelListFragment) {
-            setListener((NovelListFragment) fragment);
-        }
-    }
-
     private void createTabs() {
         // Use PagerAdapter to manage page views in fragments.
         adapter = new PagerAdapter(getSupportFragmentManager(), novels);
@@ -93,19 +79,16 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                setListener((NovelUpdateListInterface) adapter.getFragment(tab.getPosition()));
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                setListener((NovelUpdateListInterface) adapter.getFragment(tab.getPosition()));
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                setListener((NovelUpdateListInterface) adapter.getFragment(tab.getPosition()));
             }
         });
 
@@ -124,12 +107,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //if (drawer.isDrawerOpen(GravityCompat.START)) {
+        //    drawer.closeDrawer(GravityCompat.START);
+        //} else {
             super.onBackPressed();
-        }
+        //}
     }
 
     private void createActionBar() {
@@ -178,7 +161,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        //drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -195,10 +178,10 @@ public class MainActivity extends AppCompatActivity
 
         Fragment frag0 = adapter.getFragment(0);
         if(frag0 != null && frag0 instanceof NovelListFragment)
-            ((NovelUpdateListInterface) frag0).updateNovelList(novels.getTranslatedNovels());
+            ((UpdateListInterface) frag0).updateList(novels.getTranslatedNovels());
         Fragment frag1 = adapter.getFragment(1);
         if(frag1 != null && frag1 instanceof NovelListFragment)
-            ((NovelUpdateListInterface) frag1).updateNovelList(novels.getOriginalNovels());
+            ((UpdateListInterface) frag1).updateList(novels.getOriginalNovels());
 
     }
 

@@ -17,6 +17,7 @@
 package com.alexcoliveira1.lighttalesreader.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ import com.alexcoliveira1.lighttalesreader.R;
 import com.alexcoliveira1.lighttalesreader.data.Novel;
 
 import java.util.LinkedList;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 /**
  * Shows how to implement a simple Adapter for a RecyclerView.
@@ -40,7 +43,17 @@ public class NovelListAdapter extends RecyclerView.Adapter<NovelListAdapter.Nove
     class NovelViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public final TextView novelItemView;
+        private Novel novel;
         final NovelListAdapter mAdapter;
+
+
+        public Novel getNovel() {
+            return novel;
+        }
+
+        public void setNovel(Novel novel) {
+            this.novel = novel;
+        }
 
         /**
          * Creates a new custom view holder to hold the view to display in the RecyclerView.
@@ -60,6 +73,10 @@ public class NovelListAdapter extends RecyclerView.Adapter<NovelListAdapter.Nove
             // All we do here is prepend "Clicked! " to the text in the view, to verify that
             // the correct item was clicked. The underlying data does not change.
             novelItemView.setText ("+"+ novelItemView.getText());
+
+            Intent intent = new Intent(v.getContext(), ChaptersActivity.class);
+            intent.putExtra("NOVEL", novel);
+            v.getContext().startActivity(intent);
         }
     }
 
@@ -95,6 +112,7 @@ public class NovelListAdapter extends RecyclerView.Adapter<NovelListAdapter.Nove
         // Retrieve the data for that position.
         String mCurrent = mNovelList.get(position).getTitle();
         // Add the data to the view holder.
+        holder.setNovel(mNovelList.get(position));
         holder.novelItemView.setText(mCurrent);
     }
 

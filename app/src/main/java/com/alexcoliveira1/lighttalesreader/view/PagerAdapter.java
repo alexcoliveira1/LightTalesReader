@@ -25,7 +25,6 @@ import android.util.SparseArray;
 import android.view.ViewGroup;
 
 import com.alexcoliveira1.lighttalesreader.data.Novels;
-import com.alexcoliveira1.lighttalesreader.view.NovelListFragment;
 
 /**
  * Fragment to return the clicked tab.

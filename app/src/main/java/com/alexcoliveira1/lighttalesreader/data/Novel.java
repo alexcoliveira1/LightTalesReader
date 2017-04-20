@@ -3,6 +3,7 @@ package com.alexcoliveira1.lighttalesreader.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -13,18 +14,31 @@ public class Novel implements Parcelable{
 
     private String title;
     private String url;
+    private Integer novelId;
+    private String novelSlug;
+    private Integer fromChapter;
+    private Integer toChapter;
     private List<Chapter> chapters;
 
     private Novel(Parcel in) {
         title = in.readString();
         url = in.readString();
-        in.readList(chapters, List.class.getClassLoader());
+        novelId = in.readInt();
+        novelSlug = in.readString();
+        fromChapter = in.readInt();
+        toChapter = in.readInt();
+        chapters = new LinkedList<>();
+        in.readList(chapters, Chapter.class.getClassLoader());
     }
 
-    public Novel(String title, String url, List<Chapter> chapters) {
+    public Novel(String title, String url, Integer fromChapter, Integer toChapter) {
         this.title = title;
         this.url = url;
-        this.chapters = chapters;
+        this.novelId = -1;
+        this.novelSlug = "";
+        this.fromChapter = fromChapter;
+        this.toChapter = toChapter;
+        this.chapters = new LinkedList<>();
     }
 
     public String getTitle() {
@@ -43,14 +57,45 @@ public class Novel implements Parcelable{
         this.url = url;
     }
 
-    public List<Chapter> getChapters() {
-        return chapters;
+    public Integer getNovelId() {
+        return novelId;
     }
 
-    public void setChapters(List<Chapter> chapters) {
+    public void setNovelId(Integer novelId) {
+        this.novelId = novelId;
+    }
+
+    public String getNovelSlug() {
+        return novelSlug;
+    }
+
+    public void setNovelSlug(String novelSlug) {
+        this.novelSlug = novelSlug;
+    }
+
+    public Integer getFromChapter() {
+        return fromChapter;
+    }
+
+    public void setFromChapter(Integer fromChapter) {
+        this.fromChapter = fromChapter;
+    }
+
+    public Integer getToChapter() {
+        return toChapter;
+    }
+
+    public void setToChapter(Integer toChapter) {
+        this.toChapter = toChapter;
+    }
+
+    public LinkedList<Chapter> getChapters() {
+        return new LinkedList<>(chapters);
+    }
+
+    public void setChapters(LinkedList<Chapter> chapters) {
         this.chapters = chapters;
     }
-
 
     @Override
     public int describeContents() {
@@ -61,6 +106,10 @@ public class Novel implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(url);
+        dest.writeInt(novelId);
+        dest.writeString(novelSlug);
+        dest.writeInt(fromChapter);
+        dest.writeInt(toChapter);
         dest.writeList(chapters);
     }
 

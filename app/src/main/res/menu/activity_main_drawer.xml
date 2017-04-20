@@ -3,14 +3,14 @@
 
 
 
-    <item android:title="Tales">
+    <item android:name="Tales">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:title="Translated Tales" />
+                android:name="Translated Tales" />
             <item
                 android:id="@+id/nav_send"
-                android:title="Original Tales" />
+                android:name="Original Tales" />
         </menu>
     </item>
 

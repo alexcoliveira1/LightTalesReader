@@ -21,6 +21,7 @@ package com.alexcoliveira1.lighttalesreader.view;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,7 +40,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NovelListFragment extends Fragment implements NovelUpdateListInterface{
+public class NovelListFragment extends Fragment implements UpdateListInterface {
 
     private static final String TAG = "NovelListFragment";
     private RecyclerView mRecyclerView;
@@ -75,20 +76,23 @@ public class NovelListFragment extends Fragment implements NovelUpdateListInterf
 
 
         // Create recycler view.
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_novels);
         // Create an adapter and supply the data to be displayed.
         mAdapter = new NovelListAdapter(container.getContext(), novels);
         // Connect the adapter with the recycler view.
         mRecyclerView.setAdapter(mAdapter);
         // Give the recycler view a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         return view;
     }
 
     @Override
-    public void updateNovelList(List<Novel> novels) {
-        Log.d(TAG, "updateNovelList() = " + novels.size());
+    public void updateList(List<Novel> novels) {
+        Log.d(TAG, "updateList() = " + novels.size());
         this.novels.clear();
         this.novels.addAll(novels);
         if(isVisible()) {

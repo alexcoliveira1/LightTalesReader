@@ -8,7 +8,7 @@ import java.util.List;
  * Created by alex on 19/04/17.
  */
 
-public interface NovelUpdateListInterface
+public interface UpdateListInterface
 {
-    void updateNovelList(List<Novel> novels);
+    void updateList(List<Novel> novels);
 }
