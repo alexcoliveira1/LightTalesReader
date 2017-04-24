@@ -35,21 +35,10 @@ public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.
         final ChapterListAdapter mAdapter;
         private static final String TAG = "ChapterViewHolder";
 
-
-        public Chapter getChapter() {
-            return chapter;
-        }
-
         public void setChapter(Chapter chapter) {
             this.chapter = chapter;
         }
 
-        /**
-         * Creates a new custom view holder to hold the view to display in the RecyclerView.
-         *
-         * @param itemView The view in which to display the data.
-         * @param adapter The adapter that manages the the data and views for the RecyclerView.
-         */
         public ChapterViewHolder(View itemView, ChapterListAdapter adapter) {
             super(itemView);
             chapterItemView = (TextView) itemView.findViewById(R.id.novel_title);
@@ -74,14 +63,6 @@ public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.
         this.novel = novel;
     }
 
-    /**
-     * Inflates an item view and returns a new view holder that contains it.
-     * Called when the RecyclerView needs a new view holder to represent an item.
-     *
-     * @param parent The view group that holds the item views.
-     * @param viewType Used to distinguish views, if more than one type of item view is used.
-     * @return a view holder.
-     */
     @Override
     public ChapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Inflate an item view.
@@ -89,13 +70,6 @@ public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.
         return new ChapterViewHolder(mItemView, this);
     }
 
-    /**
-     * Sets the contents of an item at a given position in the RecyclerView.
-     * Called by RecyclerView to display the data at a specificed position.
-     *
-     * @param holder The view holder for that position in the RecyclerView.
-     * @param position The position of the item in the RecycerView.
-     */
     @Override
     public void onBindViewHolder(ChapterViewHolder holder, int position) {
         // Retrieve the data for that position.
@@ -105,11 +79,6 @@ public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.
         holder.chapterItemView.setText(mCurrent);
     }
 
-    /**
-     * Returns the size of the container that holds the data.
-     *
-     * @return Size of the list of data.
-     */
     @Override
     public int getItemCount() {
         return mChapterList.size();

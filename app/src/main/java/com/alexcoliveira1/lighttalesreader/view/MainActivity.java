@@ -1,5 +1,6 @@
 package com.alexcoliveira1.lighttalesreader.view;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.Loader;
 import android.os.Bundle;
@@ -45,36 +46,21 @@ public class MainActivity extends AppCompatActivity
 
         createActionBar();
 
-        //Check if a Loader is running, if it is, reconnect to it
         if(getSupportLoaderManager().getLoader(0)!=null){
             getSupportLoaderManager().initLoader(0,null,this);
         }
         getSupportLoaderManager().restartLoader(0, new Bundle(), this);
 
-
-
-        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);*/
     }
 
     private void createTabs() {
-        // Use PagerAdapter to manage page views in fragments.
         adapter = new PagerAdapter(getSupportFragmentManager(), novels);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(adapter);
 
-
-        // Create an instance of the tab layout from the view.
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-        //tabLayout.addTab(tabLayout.newTab().setText("Translateds"));
-        //tabLayout.addTab(tabLayout.newTab().setText("Originals"));
-        //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        // Setting a listener for clicks.
-        //viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -105,16 +91,6 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //if (drawer.isDrawerOpen(GravityCompat.START)) {
-        //    drawer.closeDrawer(GravityCompat.START);
-        //} else {
-            super.onBackPressed();
-        //}
-    }
-
     private void createActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -128,47 +104,23 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (item.getItemId() == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
     @Override
     public Loader<Novels> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader");
-        return new NovelsLoader(this, args.getString("queryString"));
+        return new NovelsLoader(this);
     }
 
     @Override
@@ -188,5 +140,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoaderReset(Loader<Novels> loader) {
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }

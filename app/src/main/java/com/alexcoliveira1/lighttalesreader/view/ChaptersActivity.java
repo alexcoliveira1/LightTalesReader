@@ -2,9 +2,10 @@ package com.alexcoliveira1.lighttalesreader.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.alexcoliveira1.lighttalesreader.R;
 import com.alexcoliveira1.lighttalesreader.data.Novel;
@@ -24,13 +25,13 @@ public class ChaptersActivity extends AppCompatActivity{
         Bundle b = i.getExtras();
         novel = b.getParcelable("NOVEL");
 
-        //Log.d(TAG, "TITLE = "+novel.getTitle());
-        //Log.d(TAG, "From " + novel.getFromChapter() + " To " + novel.getToChapter());
-
-        setTitle(novel.getTitle());
+        Toolbar toolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+        toolbar.setTitle(novel.getTitle());
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         ChapterListFragment chapterListFragment = new ChapterListFragment();
-
         chapterListFragment.setArguments(b);
         chapterListFragment.setRetainInstance(true);
 
@@ -40,10 +41,14 @@ public class ChaptersActivity extends AppCompatActivity{
     }
 
     @Override
-    public void onAttachFragment(Fragment fragment) {
-        Log.d(TAG, "onAttachFragment");
-        if(fragment instanceof ChapterListFragment) {
-            //setListener((ChapterListFragment) fragment);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            Log.d(TAG, "HOME");
+            super.onBackPressed();
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
+
 }

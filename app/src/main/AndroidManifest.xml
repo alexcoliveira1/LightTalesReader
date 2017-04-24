@@ -25,11 +25,12 @@
         </activity>
         <activity
             android:name=".view.ChaptersActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.ChapterPageActivity"
             android:label="@string/title_activity_chapter_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

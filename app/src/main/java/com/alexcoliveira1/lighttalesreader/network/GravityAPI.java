@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface GloryAPI {
+public interface GravityAPI {
 
     @GET("novels/chaptergroups/{novelid}")
     Call<List<ChapterGroup>> loadChapterGroups(@Path("novelid") Integer novelId);

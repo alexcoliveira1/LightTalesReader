@@ -11,10 +11,8 @@ import com.alexcoliveira1.lighttalesreader.data.Chapter;
 
 public class ChapterContentLoader extends AsyncTaskLoader<Chapter> {
 
-    // Variable that stores the search string.
     private Chapter chapter;
 
-    // Constructor providing a reference to the search term.
     public ChapterContentLoader(Context context, Chapter chapter) {
         super(context);
         this.chapter = chapter;

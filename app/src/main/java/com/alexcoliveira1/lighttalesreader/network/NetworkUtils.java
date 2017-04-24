@@ -91,8 +91,8 @@ public class NetworkUtils {
         novel.setNovelId(novelId);
 
         RetroController control = new RetroController();
-        GloryAPI gloryAPI = control.createGloryAPI();
-        List<ChapterGroup> chapterGroupList = control.getChapterGroups(gloryAPI, novel.getNovelId());
+        GravityAPI gravityAPI = control.createGravityAPI();
+        List<ChapterGroup> chapterGroupList = control.getChapterGroups(gravityAPI, novel.getNovelId());
 
         Integer min=1, max=1;
         for(ChapterGroup e : chapterGroupList) {
@@ -108,7 +108,7 @@ public class NetworkUtils {
 
         LinkedList<Chapter> chapterList = new LinkedList<>();
         for(ChapterGroup e : chapterGroupList) {
-            List<Chapter> lchapter = control.getChapters(gloryAPI, e.getChapterGroupId());
+            List<Chapter> lchapter = control.getChapters(gravityAPI, e.getChapterGroupId());
             chapterList.addAll(lchapter);
         }
 
@@ -124,8 +124,8 @@ public class NetworkUtils {
             return null;
 
         RetroController control = new RetroController();
-        GloryAPI gloryAPI = control.createGloryAPI();
-        Content chapterContent = control.getChapterContent(gloryAPI, chapterId);
+        GravityAPI gravityAPI = control.createGravityAPI();
+        Content chapterContent = control.getChapterContent(gravityAPI, chapterId);
 
         chapter.setContent(chapterContent.getContent());
 

@@ -71,42 +71,6 @@ public class ChapterListFragment extends Fragment implements
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop");
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView");
-    }
-
-    @Override
     public Loader<Novel> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader");
         return new ChaptersLoader(getContext(), novel);
@@ -120,17 +84,16 @@ public class ChapterListFragment extends Fragment implements
 
         // Create recycler view.
         mRecyclerView = (RecyclerView) getView().findViewById(R.id.recyclerview_chapters);
-        // Create an adapter and supply the data to be displayed.
-        chapters.clear();
-        chapters.addAll(novel.getChapters());
-        mAdapter = new ChapterListAdapter(getContext(), novel);
-        // Connect the adapter with the recycler view.
-        mRecyclerView.setAdapter(mAdapter);
-        // Give the recycler view a default layout manager.
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 DividerItemDecoration.VERTICAL);
+
+        mAdapter = new ChapterListAdapter(getContext(), novel);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.addItemDecoration(dividerItemDecoration);
+
+        chapters.clear();
+        chapters.addAll(novel.getChapters());
 
     }
 

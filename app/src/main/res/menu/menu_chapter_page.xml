@@ -2,9 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.alexcoliveira1.lighttalesreader.view.ChapterPageActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:name="@string/action_settings"
-        app:showAsAction="never" />
+
+    <item android:id="@+id/action_previous"
+        android:title="@string/action_previous"
+        android:icon="@drawable/ic_arrow_back_white_24dp"
+        app:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/action_next"
+        android:icon="@drawable/ic_arrow_forward_white_24dp"
+        android:title="@string/action_next"
+        app:showAsAction="ifRoom|withText" />
 </menu>

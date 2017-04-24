@@ -26,11 +26,7 @@ import android.view.ViewGroup;
 
 import com.alexcoliveira1.lighttalesreader.data.Novels;
 
-/**
- * Fragment to return the clicked tab.
- */
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    private int positionSelected;
     private SparseArray<Fragment> mPageReferenceMap = new SparseArray<>();
     private Novels novels = new Novels();
     private String fragments [] = {"Translateds","Originals"};
@@ -56,7 +52,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         }
         if(myFragment != null)
             mPageReferenceMap.put(position, myFragment);
-        positionSelected = position;
         return myFragment;
     }
 

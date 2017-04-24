@@ -75,13 +75,9 @@ public class NovelListFragment extends Fragment implements UpdateListInterface {
         }
 
 
-        // Create recycler view.
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_novels);
-        // Create an adapter and supply the data to be displayed.
         mAdapter = new NovelListAdapter(container.getContext(), novels);
-        // Connect the adapter with the recycler view.
         mRecyclerView.setAdapter(mAdapter);
-        // Give the recycler view a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 DividerItemDecoration.VERTICAL);

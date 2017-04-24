@@ -25,7 +25,7 @@ public class RetroController {
     static final String BASE_URL = "http://gravitytales.com/api/";
     static final String TAG = "RetroController";
 
-    public GloryAPI createGloryAPI() {
+    public GravityAPI createGravityAPI() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -35,14 +35,14 @@ public class RetroController {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        GloryAPI gloryAPI = retrofit.create(GloryAPI.class);
-        return gloryAPI;
+        GravityAPI gravityAPI = retrofit.create(GravityAPI.class);
+        return gravityAPI;
     }
 
-    public List<ChapterGroup> getChapterGroups(GloryAPI gloryAPI, Integer novelId) {
-        if(gloryAPI == null)
-            gloryAPI = createGloryAPI();
-        Call<List<ChapterGroup>> call = gloryAPI.loadChapterGroups(novelId);
+    public List<ChapterGroup> getChapterGroups(GravityAPI gravityAPI, Integer novelId) {
+        if(gravityAPI == null)
+            gravityAPI = createGravityAPI();
+        Call<List<ChapterGroup>> call = gravityAPI.loadChapterGroups(novelId);
         try {
             Response<List<ChapterGroup>> response = call.execute();
             if(response.isSuccessful()) {
@@ -60,10 +60,10 @@ public class RetroController {
         return null;
     }
 
-    public List<Chapter> getChapters(GloryAPI gloryAPI, Integer chapterGroupId) {
-        if(gloryAPI == null)
-            gloryAPI = createGloryAPI();
-        Call<List<Chapter>> call = gloryAPI.loadChapters(chapterGroupId);
+    public List<Chapter> getChapters(GravityAPI gravityAPI, Integer chapterGroupId) {
+        if(gravityAPI == null)
+            gravityAPI = createGravityAPI();
+        Call<List<Chapter>> call = gravityAPI.loadChapters(chapterGroupId);
         try {
             Response<List<Chapter>> response = call.execute();
             if(response.isSuccessful()) {
@@ -81,11 +81,11 @@ public class RetroController {
         return null;
     }
 
-    public Content getChapterContent(GloryAPI gloryAPI, Integer chapterId) {
-        if(gloryAPI == null)
-            gloryAPI = createGloryAPI();
+    public Content getChapterContent(GravityAPI gravityAPI, Integer chapterId) {
+        if(gravityAPI == null)
+            gravityAPI = createGravityAPI();
         Log.d(TAG, "ChapterId="+chapterId);
-        Call<Content> call = gloryAPI.loadChapterContent(chapterId);
+        Call<Content> call = gravityAPI.loadChapterContent(chapterId);
         try {
             Response<Content> response = call.execute();
             if(response.isSuccessful()) {
@@ -102,8 +102,5 @@ public class RetroController {
             e.printStackTrace();
         }
         return null;
-
-
-
     }
 }
