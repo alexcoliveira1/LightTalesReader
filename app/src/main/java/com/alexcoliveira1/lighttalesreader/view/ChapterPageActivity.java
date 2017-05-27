@@ -24,6 +24,7 @@ public class ChapterPageActivity extends AppCompatActivity {
     private ViewPager mPager;
     private Novel novel;
     private Toolbar toolbar;
+    private int indexOfChapterInList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,11 @@ public class ChapterPageActivity extends AppCompatActivity {
         Bundle b = i.getExtras();
         novel = b.getParcelable("NOVEL");
         Chapter chapter = b.getParcelable("CHAPTER");
-        Log.d(TAG, "CurrentPosition("+chapter.getNumber()+")="+chapter.getSlug());
+        for(indexOfChapterInList = 0; indexOfChapterInList < novel.getChapters().size(); indexOfChapterInList++)
+            if(novel.getChapters().get(indexOfChapterInList).getChapterId().equals(chapter.getChapterId()))
+                break;
+
+        Log.d(TAG, "CurrentPosition("+indexOfChapterInList+")="+chapter.getSlug());
 
         toolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
         toolbar.setTitle(chapter.getName());
@@ -45,7 +50,7 @@ public class ChapterPageActivity extends AppCompatActivity {
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
         mPager.setAdapter(mPagerAdapter);
-        mPager.setCurrentItem(chapter.getNumber()-1);
+        mPager.setCurrentItem(indexOfChapterInList);
         mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {

@@ -45,10 +45,10 @@ public class ChapterPageFragment extends Fragment implements LoaderManager.Loade
 
         if(savedInstanceState == null) {
             //Check if a Loader is running, if it is, reconnect to it
-            if (getActivity().getLoaderManager().getLoader(10000+chapter.getNumber()) != null) {
-                getActivity().getLoaderManager().initLoader(10000+chapter.getNumber(), null, this);
+            if (getActivity().getLoaderManager().getLoader(10000+chapter.getChapterId()) != null) {
+                getActivity().getLoaderManager().initLoader(10000+chapter.getChapterId(), null, this);
             }
-            getActivity().getLoaderManager().restartLoader(10000+chapter.getNumber(), new Bundle(), this);
+            getActivity().getLoaderManager().restartLoader(10000+chapter.getChapterId(), new Bundle(), this);
         }
     }
 

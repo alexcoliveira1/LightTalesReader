@@ -11,11 +11,11 @@ public class Chapter implements Parcelable{
 
     private Integer ChapterId;
     private String Name;
-    private Integer Number;
+    private Double Number;
     private String Slug;
     private String content;
 
-    public Chapter(Integer chapterId, String name, Integer number, String slug, String content) {
+    public Chapter(Integer chapterId, String name, Double number, String slug, String content) {
         ChapterId = chapterId;
         Name = name;
         Number = number;
@@ -23,7 +23,7 @@ public class Chapter implements Parcelable{
         this.content = content;
     }
 
-    public Chapter(String Name, String content, Integer number) {
+    public Chapter(String Name, String content, Double number) {
         this.Name = Name;
         this.content = content;
         this.Number = number;
@@ -32,7 +32,7 @@ public class Chapter implements Parcelable{
     protected Chapter(Parcel in) {
         ChapterId = in.readInt();
         Name = in.readString();
-        Number = in.readInt();
+        Number = in.readDouble();
         Slug = in.readString();
         content = in.readString();
     }
@@ -65,11 +65,11 @@ public class Chapter implements Parcelable{
         this.content = content;
     }
 
-    public Integer getNumber() {
+    public Double getNumber() {
         return Number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(Double number) {
         this.Number = number;
     }
 
@@ -98,7 +98,7 @@ public class Chapter implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(ChapterId);
         dest.writeString(Name);
-        dest.writeInt(Number);
+        dest.writeDouble(Number);
         dest.writeString(Slug);
         dest.writeString(content);
     }
